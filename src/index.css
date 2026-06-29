@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — My 1st Choice Family Daycare                       */
+/*  A calm, professional, trustworthy small-learning-environment feel. */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-cream: #faf8f4; /* primary background */
+  --color-mist: #cbd7dd; /* secondary / alternating sections */
+  --color-maroon: #7c2a35; /* accent: buttons, links, key headings */
+  --color-maroon-deep: #631f29; /* darker maroon for hover states */
+  --color-sand: #d9c8a9; /* borders / dividers / subtle backgrounds */
+  --color-ink: #2c4047; /* body text on light backgrounds */
+  --color-blush: #fbe3e6; /* text on maroon/accent backgrounds */
+
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-soft: 10px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--color-maroon);
+    text-underline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-maroon);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Respect reduced-motion preferences. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Staggered page-load reveal. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes reveal-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Subtle grain/texture overlay used on hero + accent sections. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}

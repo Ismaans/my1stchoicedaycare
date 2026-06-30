@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { navLinks, business } from '../data/site'
+import { navLinks, business, asset } from '../data/site'
+
 function Wordmark() {
   return (
     <Link to="/" className="group flex items-center gap-3" aria-label={`${business.name} — home`}>
       <img
-        src="/logo.png"
+        src={asset('logo.png')}
         alt=""
         aria-hidden="true"
         className="h-14 w-auto rounded-[12px] transition-opacity duration-200 group-hover:opacity-85"

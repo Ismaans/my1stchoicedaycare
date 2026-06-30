@@ -1,3 +1,8 @@
+// Resolves a path in /public against Vite's base URL so images load correctly
+// both locally (served from /) and on GitHub Pages (served from a subpath).
+export const asset = (path) =>
+  `${import.meta.env.BASE_URL}${String(path).replace(/^\/+/, '')}`
+
 // Single source of truth for business details used across the site.
 
 export const business = {

@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero'
 import { Button, Section } from '../components/ui'
 import { Arrow } from '../components/icons'
+import { asset } from '../data/site'
 
 const row1 = [
   {
@@ -45,7 +46,7 @@ function Card({ src, label, caption, className = '', delay = 0 }) {
       style={{ animationDelay: `${delay}ms` }}
     >
       <img
-        src={src}
+        src={asset(src)}
         alt={caption}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { asset } from '../data/site'
 
 // Shared, lightweight primitives so every page stays visually consistent.
 
@@ -57,7 +58,9 @@ export function Section({ tone = 'cream', className = '', children, id }) {
 
 // Photo block. Pass a real `src` path; falls back to a placeholder when omitted.
 export function Photo({ ratio = '4 / 3', src, label, className = '', alt }) {
-  const imgSrc = src || `https://placehold.co/1200x900/cbd7dd/2c4047?text=${encodeURIComponent(label || 'Photo')}`
+  const imgSrc = src
+    ? asset(src)
+    : `https://placehold.co/1200x900/cbd7dd/2c4047?text=${encodeURIComponent(label || 'Photo')}`
   return (
     <figure
       className={`group relative overflow-hidden rounded-[12px] border border-sand bg-mist ${className}`}

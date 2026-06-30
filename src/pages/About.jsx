@@ -1,5 +1,5 @@
 import PageHero from '../components/PageHero'
-import { Button, Eyebrow, Section, Photo } from '../components/ui'
+import { Button, Eyebrow, Section } from '../components/ui'
 import { ShieldCheck, Cross, Book, Heart, Cap, Arrow, Sprout } from '../components/icons'
 import { business } from '../data/site'
 
@@ -52,16 +52,7 @@ export default function About() {
 
       {/* ----------------------------------------------------- OWNER BIO */}
       <Section tone="cream" className="py-20 lg:py-28">
-        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <div className="lg:sticky lg:top-28">
-            <Photo
-              ratio="4 / 5"
-              label="Farrah Deeba, Owner"
-              alt="Portrait placeholder for Farrah Deeba, owner and lead caregiver"
-              className="shadow-[0_30px_60px_-30px_rgba(44,64,71,0.45)]"
-            />
-          </div>
-
+        <div className="mx-auto max-w-3xl">
           <div>
             <Eyebrow>Owner &amp; Lead Caregiver</Eyebrow>
             <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">Meet Farrah Deeba</h2>

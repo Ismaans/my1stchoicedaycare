@@ -36,7 +36,7 @@ const philosophyPoints = [
     text: 'Hands-on play is paired with an intentional daily rhythm so learning feels natural, not forced.',
   },
   {
-    title: 'Research-backed curriculum',
+    title: 'Research-based curriculum',
     text: 'We use STREAMin3 and Learning Beyond Paper to guide meaningful, age-appropriate growth.',
   },
 ]

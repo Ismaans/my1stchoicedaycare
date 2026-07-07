@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { asset } from '../data/site'
+import { ArrowRight } from 'lucide-react'
+import { asset, cta } from '../data/site'
 
 // Shared, lightweight primitives so every page stays visually consistent.
 
@@ -52,6 +53,28 @@ export function Section({ tone = 'cream', className = '', children, id }) {
   return (
     <section id={id} className={`${tones[tone]} ${className}`}>
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">{children}</div>
+    </section>
+  )
+}
+
+// Standardized closing call-to-action band. Used identically across pages so
+// every "closing CTA" section shares one headline + button style. The button
+// copy is always "Contact Us" for consistency; only the headline/subtext vary.
+export function CtaBand({ headline, subtext }) {
+  return (
+    <section className="grain relative overflow-hidden bg-maroon text-blush">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-maroon-deep/60 blur-3xl"
+      />
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 py-16 text-center sm:px-8 lg:py-20">
+        <h2 className="max-w-2xl text-3xl font-bold text-blush sm:text-4xl">{headline}</h2>
+        {subtext && <p className="max-w-xl text-blush/85">{subtext}</p>}
+        <Button to="/contact" variant="light">
+          {cta.closing.button}
+          <ArrowRight className="h-4 w-4" />
+        </Button>
+      </div>
     </section>
   )
 }

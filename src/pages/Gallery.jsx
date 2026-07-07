@@ -1,65 +1,125 @@
+import { useMemo, useState } from 'react'
+import Lightbox from 'yet-another-react-lightbox'
+import 'yet-another-react-lightbox/styles.css'
+import { ZoomIn } from 'lucide-react'
 import PageHero from '../components/PageHero'
-import { Button, Section } from '../components/ui'
-import { Arrow } from '../components/icons'
+import { CtaBand, Section } from '../components/ui'
 import { asset } from '../data/site'
 
-const row1 = [
+// Each category holds an `images` array so additional photos can be added later
+// without changing the lightbox component.
+const categories = [
   {
-    src: '/photos/play-area.png',
     label: 'The Play Area',
-    caption: 'An open, soft-floored space where toddlers build, stack, and move safely throughout the day.',
+    caption:
+      'An open, soft-floored space where toddlers build, stack, and move safely throughout the day.',
+    span: 'lg:row-span-2',
+    ratio: '4 / 3',
+    images: [{ src: '/photos/play-area.png', alt: 'The open play area with alphabet mat and foam blocks' }],
   },
   {
-    src: '/photos/learning-wall.png',
     label: 'The Learning Wall',
-    caption: 'The chalkboard wall — a living display of the day\u2019s learning, updated by the children.',
+    caption:
+      'The chalkboard wall — a living display of the day\u2019s learning, updated by the children.',
+    ratio: '4 / 5',
+    images: [{ src: '/photos/learning-wall.png', alt: 'The chalkboard learning wall with letter cards' }],
   },
   {
-    src: '/photos/reading-nook.png',
     label: 'Reading & Discovery Corner',
-    caption: 'A quiet corner with dolls, a mirror, and emotion posters for imaginative, social play.',
+    caption:
+      'A quiet corner with dolls, a mirror, and emotion posters for imaginative, social play.',
+    ratio: '4 / 5',
+    images: [{ src: '/photos/reading-nook.png', alt: 'The reading and discovery corner' }],
   },
-]
-
-const row2 = [
   {
-    src: '/photos/sensory-table.png',
     label: 'Sensory & Discovery Shelf',
     caption: 'Hands-on bins for sorting, scooping, and exploring textures and early science.',
+    ratio: '4 / 3',
+    images: [{ src: '/photos/sensory-table.png', alt: 'Sensory and discovery shelf with sorted bins' }],
   },
   {
-    src: '/photos/mealtime-table.png',
     label: 'Mealtime & Play Kitchen',
-    caption: 'Child-sized seating where children share meals and practice independence together.',
+    caption:
+      'Child-sized seating where children share meals and practice independence together.',
+    ratio: '4 / 5',
+    images: [{ src: '/photos/mealtime-table.png', alt: 'Mealtime table and play kitchen area' }],
   },
   {
-    src: '/photos/outdoor.png',
     label: 'Outdoor Play',
-    caption: 'A fenced backyard with a slide and play structure \u2014 fresh air and movement every day.',
+    caption:
+      'A fenced backyard with a slide and play structure \u2014 fresh air and movement every day.',
+    ratio: '4 / 5',
+    images: [{ src: '/photos/outdoor.png', alt: 'Outdoor play area with slide and play structure' }],
   },
 ]
 
-function Card({ src, label, caption, className = '', delay = 0 }) {
+function GalleryCard({ category, slideIndex, cardIndex, onOpen }) {
+  const image = category.images[0]
   return (
     <figure
-      className={`reveal group relative overflow-hidden rounded-[14px] border border-sand bg-mist ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
+      className={`reveal group relative overflow-hidden rounded-[14px] border border-sand bg-mist ${
+        category.span || ''
+      }`}
+      style={{ aspectRatio: category.ratio, animationDelay: `${cardIndex * 70}ms` }}
     >
+      <button
+        type="button"
+        onClick={() => onOpen(slideIndex)}
+        className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maroon"
+        aria-label={`View full size: ${category.label}`}
+      >
+        <span className="sr-only">Open {category.label} in lightbox</span>
+      </button>
       <img
-        src={asset(src)}
-        alt={caption}
+        src={asset(image.src)}
+        alt={image.alt}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
       />
-      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent p-5 pt-14">
-        <p className="font-display text-base font-semibold text-cream">{label}</p>
-        <p className="mt-1 text-sm leading-snug text-cream/85">{caption}</p>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-cream/90 text-ink opacity-0 shadow-md backdrop-blur transition-opacity duration-300 group-hover:opacity-100"
+      >
+        <ZoomIn className="h-4 w-4" />
+      </span>
+      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent p-5 pt-14">
+        <p className="font-display text-base font-semibold text-cream">{category.label}</p>
+        <p className="mt-1 text-sm leading-snug text-cream/85">{category.caption}</p>
       </figcaption>
     </figure>
   )
 }
 
 export default function Gallery() {
+  const [lightboxIndex, setLightboxIndex] = useState(-1)
+
+  // Flatten all category images into one lightbox slide list.
+  const slides = useMemo(
+    () =>
+      categories.flatMap((cat) =>
+        cat.images.map((img) => ({
+          src: asset(img.src),
+          alt: img.alt,
+          title: cat.label,
+          description: cat.caption,
+        })),
+      ),
+    [],
+  )
+
+  // Map each category card to its first slide index in the flat list.
+  const categoryStartIndex = useMemo(() => {
+    let cursor = 0
+    return categories.map((cat) => {
+      const start = cursor
+      cursor += cat.images.length
+      return start
+    })
+  }, [])
+
+  const row1 = categories.slice(0, 3)
+  const row2 = categories.slice(3)
+
   return (
     <>
       <PageHero
@@ -70,78 +130,43 @@ export default function Gallery() {
 
       <Section tone="cream" className="py-16 lg:py-24">
         <div className="flex flex-col gap-5">
-
-          {/* ---- Row 1: Play Area (left, full height) + Learning Wall & Reading Nook (stacked right) ---- */}
-          <div
-            className="grid gap-5"
-            style={{
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '280px 280px',
-              alignItems: 'stretch',
-            }}
-          >
-            {/* Play Area spans both rows on desktop */}
-            <Card
-              src={row1[0].src}
-              label={row1[0].label}
-              caption={row1[0].caption}
-              className="[grid-row:1/3]"
-              delay={0}
-            />
-            {/* Learning Wall — top right */}
-            <Card
-              src={row1[1].src}
-              label={row1[1].label}
-              caption={row1[1].caption}
-              delay={80}
-            />
-            {/* Reading & Discovery Corner — bottom right */}
-            <Card
-              src={row1[2].src}
-              label={row1[2].label}
-              caption={row1[2].caption}
-              delay={160}
-            />
-          </div>
-
-          {/* ---- Row 2: Three equal-height, equal-width cards ---- */}
-          <div
-            className="grid gap-5"
-            style={{
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gridTemplateRows: '320px',
-              alignItems: 'stretch',
-            }}
-          >
-            {row2.map((p, i) => (
-              <Card
-                key={p.label}
-                src={p.src}
-                label={p.label}
-                caption={p.caption}
-                delay={i * 80}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:auto-rows-[280px]">
+            {row1.map((cat, i) => (
+              <GalleryCard
+                key={cat.label}
+                category={cat}
+                slideIndex={categoryStartIndex[i]}
+                cardIndex={i}
+                onOpen={setLightboxIndex}
               />
             ))}
           </div>
 
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:[grid-template-rows:320px]">
+            {row2.map((cat, i) => (
+              <GalleryCard
+                key={cat.label}
+                category={cat}
+                slideIndex={categoryStartIndex[i + 3]}
+                cardIndex={i + 3}
+                onOpen={setLightboxIndex}
+              />
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section tone="mist" className="py-16 lg:py-20">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="max-w-2xl text-2xl font-bold text-ink sm:text-3xl">
-            Want to see it in person?
-          </h2>
-          <p className="max-w-xl text-ink/80">
-            The best way to get a feel for our home is to reach out. We're glad to answer questions
-            and tell you more about daily life here.
-          </p>
-          <Button to="/contact">
-            Contact Us
-            <Arrow className="h-4 w-4" />
-          </Button>
-        </div>
-      </Section>
+      <Lightbox
+        open={lightboxIndex >= 0}
+        close={() => setLightboxIndex(-1)}
+        index={lightboxIndex}
+        slides={slides}
+      />
+
+      <CtaBand
+        headline="Want to see it in person?"
+        subtext="The best way to get a feel for our home is to reach out. We're glad to answer questions and tell you more about daily life here."
+      />
     </>
   )
 }

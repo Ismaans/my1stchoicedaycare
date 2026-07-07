@@ -1,16 +1,27 @@
 import PageHero from '../components/PageHero'
-import { Button, Eyebrow, Section } from '../components/ui'
-import { ShieldCheck, Cross, Book, Heart, Cap, Arrow, Sprout } from '../components/icons'
+import { Button, Eyebrow, Section, CtaBand } from '../components/ui'
+import {
+  ShieldCheck,
+  Blocks,
+  BookOpen,
+  BadgeCheck,
+  GraduationCap,
+  Sprout,
+  Heart,
+  HeartPulse,
+  ArrowRight,
+  Check,
+} from 'lucide-react'
 import { business } from '../data/site'
 
 const credentials = [
   {
-    icon: Cap,
+    icon: GraduationCap,
     title: "Bachelor's Degree",
     text: 'In Psychology and Islamic History — a foundation in how children think, feel, and learn.',
   },
   {
-    icon: Book,
+    icon: BadgeCheck,
     title: 'CDA Credential',
     text: 'Holds a nationally recognized Child Development Associate (CDA) credential.',
   },
@@ -28,14 +39,17 @@ const credentials = [
 
 const philosophyPoints = [
   {
+    icon: ShieldCheck,
     title: 'Safe & nurturing first',
     text: 'A calm, secure environment where every child feels loved, settled, and confident enough to explore.',
   },
   {
+    icon: Blocks,
     title: 'Play-based, with structure',
     text: 'Hands-on play is paired with an intentional daily rhythm so learning feels natural, not forced.',
   },
   {
+    icon: BookOpen,
     title: 'Research-based curriculum',
     text: 'We use STREAMin3 and Learning Beyond Paper to guide meaningful, age-appropriate growth.',
   },
@@ -46,7 +60,7 @@ export default function About() {
     <>
       <PageHero
         eyebrow="About"
-        title="Caring leadership you can trust"
+        title="Care led by one dedicated caregiver"
         intro="My 1st Choice Family Daycare is a single-home program led, day in and day out, by its owner. That means consistency, accountability, and a familiar face your child can count on."
       />
 
@@ -76,7 +90,7 @@ export default function About() {
                   className="rounded-[12px] border border-sand bg-cream p-5 transition-shadow hover:shadow-[0_18px_40px_-30px_rgba(44,64,71,0.5)]"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-mist text-maroon">
-                    <c.icon className="h-5 w-5" />
+                    <c.icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>
                   <h3 className="mt-4 text-lg font-semibold text-ink">{c.title}</h3>
                   <p className="mt-1.5 text-sm text-ink/75">{c.text}</p>
@@ -97,19 +111,27 @@ export default function About() {
           <p className="mt-5 text-ink/80">
             We believe children learn best when they feel safe and valued. Our days balance the joy
             of play-based discovery with the reassurance of a consistent routine and a structured,
-            research-informed curriculum.
+            research-based curriculum.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        {/* Left-right layout: icon beside text; collapses to stacked on mobile. */}
+        <div className="mt-12 space-y-4">
           {philosophyPoints.map((p, i) => (
             <div
               key={p.title}
-              className="relative rounded-[12px] border border-sand bg-cream p-7 shadow-[0_18px_40px_-32px_rgba(44,64,71,0.5)]"
+              className="flex flex-col gap-4 rounded-[14px] border border-sand bg-cream p-6 shadow-[0_18px_40px_-34px_rgba(44,64,71,0.5)] sm:flex-row sm:items-center sm:gap-6 sm:p-7"
             >
-              <span className="font-display text-4xl font-bold text-sand">0{i + 1}</span>
-              <h3 className="mt-3 text-lg font-semibold text-ink">{p.title}</h3>
-              <p className="mt-2 text-sm text-ink/75">{p.text}</p>
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] bg-maroon text-blush">
+                <p.icon className="h-7 w-7" strokeWidth={1.75} />
+              </span>
+              <div className="sm:flex-1">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-display text-lg font-bold text-sand">0{i + 1}</span>
+                  <h3 className="text-lg font-semibold text-ink">{p.title}</h3>
+                </div>
+                <p className="mt-1.5 text-ink/75">{p.text}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -132,7 +154,7 @@ export default function About() {
           <div className="rounded-[14px] border border-sand bg-mist/40 p-8">
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-maroon text-blush">
-                <ShieldCheck className="h-6 w-6" />
+                <ShieldCheck className="h-6 w-6" strokeWidth={1.75} />
               </span>
               <h3 className="text-xl font-semibold text-ink">
                 Licensed Virginia Family Child Care Provider
@@ -151,18 +173,7 @@ export default function About() {
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-ink/85">
                   <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-maroon/10 text-maroon">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-3.5 w-3.5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="m5 12 4 4 10-10" />
-                    </svg>
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
                   </span>
                   <span className="text-[0.97rem]">{item}</span>
                 </li>
@@ -171,11 +182,24 @@ export default function About() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <div className="rounded-[14px] border border-maroon/20 bg-cream p-7">
-              <p className="text-sm font-medium uppercase tracking-wider text-maroon">
-                Verified &amp; current
-              </p>
-              <p className="mt-3 text-ink/85">
+            {/* Verified & Current — high-visual-weight accent callout */}
+            <div className="relative overflow-hidden rounded-[14px] border-2 border-maroon bg-maroon/[0.06] p-7">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-maroon/10 blur-2xl"
+              />
+              <div className="relative flex items-center gap-3">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-maroon text-blush shadow-[0_8px_20px_-8px_rgba(124,42,53,0.8)]">
+                  <BadgeCheck className="h-7 w-7" strokeWidth={1.75} />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-maroon">
+                    License status
+                  </p>
+                  <p className="font-display text-xl font-bold text-ink">Verified &amp; Current</p>
+                </div>
+              </div>
+              <p className="relative mt-4 text-ink/85">
                 Our license has been verified as current and in good standing. You don't have to
                 take our word for it — Virginia publishes inspection records publicly so you can
                 review them yourself.
@@ -184,20 +208,19 @@ export default function About() {
                 href={business.licensingSearchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="outline"
-                className="mt-5 w-full"
+                className="relative mt-5 w-full"
               >
                 Look up our license
-                <Arrow className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
-              <p className="mt-3 text-xs text-ink/55">
+              <p className="relative mt-3 text-xs text-ink/55">
                 Opens Virginia's official child care licensing search.
               </p>
             </div>
 
             <div className="rounded-[14px] border border-sand bg-mist/40 p-7">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-maroon">
-                <Cross className="h-5 w-5" />
+                <HeartPulse className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <h3 className="mt-4 text-lg font-semibold text-ink">Prepared for the unexpected</h3>
               <p className="mt-2 text-sm text-ink/75">
@@ -210,17 +233,7 @@ export default function About() {
       </Section>
 
       {/* ----------------------------------------------------- CTA */}
-      <Section tone="maroon" className="py-16 lg:py-20">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="max-w-2xl text-2xl font-bold text-blush sm:text-3xl">
-            Have questions about our home, routine, or approach?
-          </h2>
-          <Button to="/contact" variant="light">
-            Contact Us
-            <Arrow className="h-4 w-4" />
-          </Button>
-        </div>
-      </Section>
+      <CtaBand headline="Have questions about our home, routine, or approach?" />
     </>
   )
 }

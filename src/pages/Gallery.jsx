@@ -6,49 +6,47 @@ import PageHero from '../components/PageHero'
 import { CtaBand, Section } from '../components/ui'
 import { asset } from '../data/site'
 
-// Each category holds an `images` array so additional photos can be added later
-// without changing the lightbox component.
+// Each category holds an `images` array so additional photos can be added later.
 const categories = [
   {
     label: 'The Play Area',
     caption:
       'An open, soft-floored space where toddlers build, stack, and move safely throughout the day.',
-    span: 'lg:row-span-2',
-    ratio: '4 / 3',
+    gridClass: 'lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:min-h-[580px]',
     images: [{ src: '/photos/play-area.png', alt: 'The open play area with alphabet mat and foam blocks' }],
   },
   {
     label: 'The Learning Wall',
     caption:
       'The chalkboard wall — a living display of the day\u2019s learning, updated by the children.',
-    ratio: '4 / 5',
+    gridClass: 'lg:col-start-2 lg:row-start-1 lg:min-h-[280px]',
     images: [{ src: '/photos/learning-wall.png', alt: 'The chalkboard learning wall with letter cards' }],
   },
   {
     label: 'Reading & Discovery Corner',
     caption:
       'A quiet corner with dolls, a mirror, and emotion posters for imaginative, social play.',
-    ratio: '4 / 5',
+    gridClass: 'lg:col-start-2 lg:row-start-2 lg:min-h-[280px]',
     images: [{ src: '/photos/reading-nook.png', alt: 'The reading and discovery corner' }],
   },
   {
     label: 'Sensory & Discovery Shelf',
     caption: 'Hands-on bins for sorting, scooping, and exploring textures and early science.',
-    ratio: '4 / 3',
+    gridClass: 'lg:col-start-1 lg:row-start-3 min-h-[280px]',
     images: [{ src: '/photos/sensory-table.png', alt: 'Sensory and discovery shelf with sorted bins' }],
   },
   {
     label: 'Mealtime & Play Kitchen',
     caption:
       'Child-sized seating where children share meals and practice independence together.',
-    ratio: '4 / 5',
+    gridClass: 'lg:col-start-2 lg:row-start-3 min-h-[280px]',
     images: [{ src: '/photos/mealtime-table.png', alt: 'Mealtime table and play kitchen area' }],
   },
   {
     label: 'Outdoor Play',
     caption:
       'A fenced backyard with a slide and play structure \u2014 fresh air and movement every day.',
-    ratio: '4 / 5',
+    gridClass: 'lg:col-start-3 lg:row-start-3 min-h-[280px]',
     images: [{ src: '/photos/outdoor.png', alt: 'Outdoor play area with slide and play structure' }],
   },
 ]
@@ -57,10 +55,8 @@ function GalleryCard({ category, slideIndex, cardIndex, onOpen }) {
   const image = category.images[0]
   return (
     <figure
-      className={`reveal group relative overflow-hidden rounded-[14px] border border-sand bg-mist ${
-        category.span || ''
-      }`}
-      style={{ aspectRatio: category.ratio, animationDelay: `${cardIndex * 70}ms` }}
+      className={`reveal group relative h-full min-h-[240px] overflow-hidden rounded-[14px] border border-sand bg-mist ${category.gridClass || ''}`}
+      style={{ animationDelay: `${cardIndex * 70}ms` }}
     >
       <button
         type="button"
@@ -93,7 +89,6 @@ function GalleryCard({ category, slideIndex, cardIndex, onOpen }) {
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
 
-  // Flatten all category images into one lightbox slide list.
   const slides = useMemo(
     () =>
       categories.flatMap((cat) =>
@@ -107,7 +102,6 @@ export default function Gallery() {
     [],
   )
 
-  // Map each category card to its first slide index in the flat list.
   const categoryStartIndex = useMemo(() => {
     let cursor = 0
     return categories.map((cat) => {
@@ -116,9 +110,6 @@ export default function Gallery() {
       return start
     })
   }, [])
-
-  const row1 = categories.slice(0, 3)
-  const row2 = categories.slice(3)
 
   return (
     <>
@@ -129,30 +120,23 @@ export default function Gallery() {
       />
 
       <Section tone="cream" className="py-16 lg:py-24">
-        <div className="flex flex-col gap-5">
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:auto-rows-[280px]">
-            {row1.map((cat, i) => (
-              <GalleryCard
-                key={cat.label}
-                category={cat}
-                slideIndex={categoryStartIndex[i]}
-                cardIndex={i}
-                onOpen={setLightboxIndex}
-              />
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:[grid-template-rows:320px]">
-            {row2.map((cat, i) => (
-              <GalleryCard
-                key={cat.label}
-                category={cat}
-                slideIndex={categoryStartIndex[i + 3]}
-                cardIndex={i + 3}
-                onOpen={setLightboxIndex}
-              />
-            ))}
-          </div>
+        {/*
+          Single grid with explicit placement on lg:
+          Row 1–2 left: Play Area (spans both rows)
+          Row 1 right: Learning Wall
+          Row 2 right: Reading Corner
+          Row 3: three equal cards
+        */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[280px_280px_320px]">
+          {categories.map((cat, i) => (
+            <GalleryCard
+              key={cat.label}
+              category={cat}
+              slideIndex={categoryStartIndex[i]}
+              cardIndex={i}
+              onOpen={setLightboxIndex}
+            />
+          ))}
         </div>
       </Section>
 

@@ -6,10 +6,10 @@ function Wordmark() {
   return (
     <Link to="/" className="group flex items-center gap-3" aria-label={`${business.name} — home`}>
       <img
-        src={asset('logo.png')}
+        src={asset('site-logo-cream.png')}
         alt=""
         aria-hidden="true"
-        className="h-14 w-auto rounded-[12px] transition-opacity duration-200 group-hover:opacity-85"
+        className="h-10 w-auto rounded-[10px] transition-opacity duration-200 group-hover:opacity-85"
       />
       <span className="flex flex-col leading-none">
         <span className="font-display text-[1.05rem] font-bold tracking-tight text-ink">

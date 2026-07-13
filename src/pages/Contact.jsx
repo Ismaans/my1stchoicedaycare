@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PageHero from '../components/PageHero'
-import { CtaBand, Section } from '../components/ui'
+import { Section } from '../components/ui'
 import { Phone, Mail, Pin, Clock, Arrow } from '../components/icons'
 import { ChevronDown } from 'lucide-react'
 import { business, hours } from '../data/site'
@@ -252,8 +252,6 @@ export default function Contact() {
           )}
         </div>
       </Section>
-
-      <CtaBand headline="Ready to get started?" />
     </>
   )
 }

@@ -19,7 +19,7 @@ export const business = {
     'https://mail.google.com/mail/?view=cm&fs=1&to=farrah.my1stchoice@gmail.com',
   zelleNumber: '571-421-6573',
   area: '2404 Belle Haven Meadows Court, Alexandria, VA 22306',
-  // Coordinates from the US Census geocoder for the Leaflet/OSM map marker.
+  // Coordinates from the US Census geocoder for the map marker.
   coords: { lat: 38.775794, lng: -77.073519 },
   mapsHref:
     'https://www.google.com/maps/search/?api=1&query=2404%20Belle%20Haven%20Meadows%20Court%2C%20Alexandria%2C%20VA%2022306',

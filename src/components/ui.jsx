@@ -49,6 +49,7 @@ export function Section({ tone = 'cream', className = '', children, id }) {
     mist: 'bg-mist',
     maroon: 'bg-maroon text-blush',
     sand: 'bg-sand/30',
+    white: 'bg-white',
   }
   return (
     <section id={id} className={`${tones[tone]} ${className}`}>

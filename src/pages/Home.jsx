@@ -130,7 +130,8 @@ export default function Home() {
               className="reveal mt-6 text-4xl font-bold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]"
               style={{ animationDelay: '80ms' }}
             >
-              A Safe Place to <span className="text-maroon">Learn, Play</span> and Grow
+              A Safe Place to <span className="text-maroon">Learn, Play</span> and{' '}
+              <span className="text-maroon">Grow</span>
             </h1>
 
             <p
@@ -217,10 +218,10 @@ export default function Home() {
 
       {/* ------------------------------- WELCOME (credibility-first) */}
       <Section tone="cream" className="py-20 lg:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <Photo
             src="/photos/home-environment.png"
-            ratio="5 / 4"
+            ratio="1 / 1"
             label="A Calm Home Environment"
             alt="A calm, organized corner of the home daycare"
           />
@@ -320,36 +321,21 @@ export default function Home() {
       </Section>
 
       {/* --------------------------------------------------- LOCATION */}
-      <Section tone="cream" className="py-20 lg:py-28">
-        <div className="grid items-stretch gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <div className="flex flex-col justify-center">
-            <Eyebrow>Where we are</Eyebrow>
-            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
+      <Section tone="white" className="py-24 lg:py-36">
+        <div className="grid items-stretch gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+          <div>
+            <Eyebrow className="text-[0.95rem] tracking-[0.2em]">Where we are</Eyebrow>
+            <h2 className="mt-4 text-4xl font-bold text-ink sm:text-5xl">
               Rooted in Belle Haven Meadows
             </h2>
-            <p className="mt-5 text-ink/80">
+            <p className="mt-6 max-w-[42ch] text-lg leading-relaxed text-ink/80">
               We're located in a quiet residential neighborhood in the Belle Haven Meadows area of
-              Alexandria, VA — easy to reach and calm by design.
+              Alexandria, VA, close to West Potomac High School and just a short drive from US-1.
+              It's a calm, tree-lined street with easy parking for drop-off and pick-up, giving
+              families a peaceful, predictable start and end to every day.
             </p>
-            <p className="mt-4 flex items-start gap-2 text-ink/80">
-              <span className="font-semibold text-ink">Address:</span>
-              <a
-                href={business.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-maroon underline decoration-sand underline-offset-2 transition-colors hover:text-maroon-deep hover:decoration-maroon"
-              >
-                {business.area}
-              </a>
-            </p>
-            <div className="mt-7">
-              <Button href={business.mapsHref} target="_blank" rel="noopener noreferrer">
-                Get Directions
-                <Arrow className="h-4 w-4" />
-              </Button>
-            </div>
           </div>
-          <LocationMap className="min-h-[340px]" />
+          <LocationMap className="h-full" />
         </div>
       </Section>
 

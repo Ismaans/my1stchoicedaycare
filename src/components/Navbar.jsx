@@ -23,6 +23,8 @@ function Wordmark() {
   )
 }
 
+const MOBILE_MENU_MQ = '(max-width: 768px)'
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -31,6 +33,48 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(false)
   }, [location.pathname])
+
+  // Lock background scroll while the mobile menu is open.
+  // Cleanup always clears overflow so the page never stays stuck.
+  useEffect(() => {
+    if (!open) return
+
+    const mq = window.matchMedia(MOBILE_MENU_MQ)
+
+    const syncBodyLock = () => {
+      document.body.style.overflow = mq.matches ? 'hidden' : ''
+    }
+
+    syncBodyLock()
+    mq.addEventListener('change', syncBodyLock)
+
+    return () => {
+      mq.removeEventListener('change', syncBodyLock)
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  // Close on outside tap and browser back while open.
+  useEffect(() => {
+    if (!open) return
+
+    const onPointerDown = (event) => {
+      const header = document.getElementById('site-header')
+      if (header && !header.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    const onPopState = () => setOpen(false)
+
+    document.addEventListener('pointerdown', onPointerDown)
+    window.addEventListener('popstate', onPopState)
+
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('popstate', onPopState)
+    }
+  }, [open])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -48,6 +92,7 @@ export default function Navbar() {
 
   return (
     <header
+      id="site-header"
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         scrolled
           ? 'border-sand/70 bg-cream/90 backdrop-blur-md shadow-[0_6px_24px_-18px_rgba(44,64,71,0.6)]'

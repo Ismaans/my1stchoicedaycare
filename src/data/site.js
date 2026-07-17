@@ -12,11 +12,11 @@ export const business = {
   tagline: 'A safe, nurturing second home for your child.',
   phoneDisplay: '+1 (571) 421-6573',
   phoneHref: 'tel:+15714216573',
-  email: 'farrah.my1stchoice@gmail.com',
-  emailDisplay: 'Farrah.my1stchoice@gmail.com',
+  email: 'farrah270@gmail.com',
+  emailDisplay: 'farrah270@gmail.com',
   // Opens the Gmail web compose window addressed to the daycare.
   gmailHref:
-    'https://mail.google.com/mail/?view=cm&fs=1&to=farrah.my1stchoice@gmail.com',
+    'https://mail.google.com/mail/?view=cm&fs=1&to=farrah270@gmail.com',
   zelleNumber: '571-421-6573',
   area: '2404 Belle Haven Meadows Court, Alexandria, VA 22306',
   // Coordinates from the US Census geocoder for the map marker.

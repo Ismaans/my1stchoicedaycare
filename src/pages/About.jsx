@@ -1,4 +1,5 @@
 import PageHero from '../components/PageHero'
+import ExperiencesGrid from '../components/ExperiencesGrid'
 import { Button, Eyebrow, Section, CtaBand } from '../components/ui'
 import {
   ShieldCheck,
@@ -230,6 +231,11 @@ export default function About() {
             </div>
           </div>
         </div>
+      </Section>
+
+      {/* --------------------------------------------------- EXPERIENCES */}
+      <Section tone="mist" className="py-16 lg:py-24">
+        <ExperiencesGrid />
       </Section>
 
       {/* ----------------------------------------------------- CTA */}

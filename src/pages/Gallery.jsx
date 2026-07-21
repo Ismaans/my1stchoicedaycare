@@ -3,89 +3,9 @@ import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import { ZoomIn } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import ExperiencesGrid from '../components/ExperiencesGrid'
 import { CtaBand, Section } from '../components/ui'
 import { asset } from '../data/site'
-
-const actionPhotos = [
-  {
-    label: 'Morning Drop-Off',
-    caption: 'Every morning starts with a warm welcome at the door.',
-    src: '/photos/PHOTO-2026-07-13-12-39-58.jpg',
-    alt: 'A parent and child arriving at the daycare door on a snowy morning',
-  },
-  {
-    label: 'Follow the Path',
-    caption: 'Chalk arrows and open driveways — gross motor learning in the fresh air.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_2.jpg',
-    alt: 'A child following chalk arrows drawn on a driveway',
-  },
-  {
-    label: 'Leaf Day Fun',
-    caption: 'Fall leaves and a little creativity — outdoor sensory play in every season.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_3.jpg',
-    alt: 'A toddler sitting in a pile of fall leaves with a pot on their head',
-  },
-  {
-    label: 'Letters in Nature',
-    caption: 'Spelling with nature — children arrange leaves to form letters on the pavement.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_4.jpg',
-    alt: 'Children standing near letters spelled out with leaves on a dark pavement',
-  },
-  {
-    label: 'Building Up',
-    caption: 'Building confidence one block at a time — soft foam stacking in the play room.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_5.jpg',
-    alt: 'A toddler climbing a tower of colorful foam blocks in front of a chalkboard',
-  },
-  {
-    label: 'Art & Craft Time',
-    caption: 'Little hands at work — coloring and fine motor development at the art table.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_6.jpg',
-    alt: 'Close-up of children coloring together with crayons',
-  },
-  {
-    label: 'Outdoor Mural',
-    caption: 'Big canvas, bigger ideas — outdoor painting on a cardboard mural in the yard.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_7.jpg',
-    alt: 'A child painting on a large cardboard mural propped against a tree',
-  },
-  {
-    label: 'Little Explorer',
-    caption: 'Curiosity looks good on everyone.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_8.jpg',
-    alt: 'A baby wearing oversized round blue toy glasses and smiling',
-  },
-  {
-    label: 'Driveway Learning',
-    caption: 'Drawing shapes and letters in chalk — learning happens everywhere, even the driveway.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_9.jpg',
-    alt: 'A child drawing chalk shapes on a driveway from above',
-  },
-  {
-    label: 'Science Discovery',
-    caption: 'A magnifying glass and a painted pumpkin — early science exploration at the activity table.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_10.jpg',
-    alt: 'A toddler examining a painted pumpkin with a magnifying glass at a table',
-  },
-  {
-    label: 'Outdoor Adventure',
-    caption: 'The yard becomes a classroom — parachutes, butterflies, and movement games outside.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59_11.jpg',
-    alt: 'Outdoor yard with parachutes and butterfly decorations spread on the grass',
-  },
-  {
-    label: 'Backyard Play',
-    caption: 'Sunshine and ride-on toys — outdoor free play in the fenced backyard.',
-    src: '/photos/PHOTO-2026-07-13-12-39-59.jpg',
-    alt: 'A toddler pushing a blue ride-on toy car across a green lawn',
-  },
-  {
-    label: 'Big Art, Little Artist',
-    caption: 'Spray painting their own mural — big art for little artists.',
-    src: '/photos/PHOTO-2026-07-13-12-42-36.jpg',
-    alt: 'A child spray painting a large colorful mural on cardboard outside',
-  },
-]
 
 // Each category holds an `images` array so additional photos can be added later.
 const categories = [
@@ -167,44 +87,10 @@ function GalleryCard({ category, slideIndex, cardIndex, onOpen }) {
   )
 }
 
-function ActionCard({ photo, slideIndex, cardIndex, onOpen }) {
-  return (
-    <figure
-      className={`reveal group relative min-h-[240px] overflow-hidden rounded-[14px] border border-sand bg-mist`}
-      style={{ animationDelay: `${cardIndex * 70}ms` }}
-    >
-      <button
-        type="button"
-        onClick={() => onOpen(slideIndex)}
-        className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maroon"
-        aria-label={`View full size: ${photo.label}`}
-      >
-        <span className="sr-only">Open photo in lightbox</span>
-      </button>
-      <img
-        src={asset(photo.src)}
-        alt={photo.alt}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-      />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-cream/90 text-ink opacity-0 shadow-md backdrop-blur transition-opacity duration-300 group-hover:opacity-100"
-      >
-        <ZoomIn className="h-4 w-4" />
-      </span>
-      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent p-5 pt-14">
-        <p className="font-display text-base font-semibold text-cream">{photo.label}</p>
-        <p className="mt-1 text-sm leading-snug text-cream/85">{photo.caption}</p>
-      </figcaption>
-    </figure>
-  )
-}
-
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
 
-  const spaceSlides = useMemo(
+  const slides = useMemo(
     () =>
       categories.flatMap((cat) =>
         cat.images.map((img) => ({
@@ -216,20 +102,6 @@ export default function Gallery() {
       ),
     [],
   )
-
-  const actionSlides = useMemo(
-    () =>
-      actionPhotos.map((photo) => ({
-        src: asset(photo.src),
-        alt: photo.alt,
-        title: photo.label,
-        description: photo.caption,
-      })),
-    [],
-  )
-
-  const allSlides = useMemo(() => [...spaceSlides, ...actionSlides], [spaceSlides, actionSlides])
-  const actionStartIndex = spaceSlides.length
 
   const categoryStartIndex = useMemo(() => {
     let cursor = 0
@@ -268,27 +140,14 @@ export default function Gallery() {
           ))}
         </div>
 
-        <div className="mt-16 lg:mt-24">
-          <h2 className="font-display text-2xl font-semibold text-ink mb-6">Learning in Action</h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" style={{ gridAutoRows: '280px' }}>
-            {actionPhotos.map((photo, i) => (
-              <ActionCard
-                key={photo.src}
-                photo={photo}
-                slideIndex={actionStartIndex + i}
-                cardIndex={i}
-                onOpen={setLightboxIndex}
-              />
-            ))}
-          </div>
-        </div>
+        <ExperiencesGrid className="mt-16 lg:mt-24" />
       </Section>
 
       <Lightbox
         open={lightboxIndex >= 0}
         close={() => setLightboxIndex(-1)}
         index={lightboxIndex}
-        slides={allSlides}
+        slides={slides}
       />
 
       <CtaBand

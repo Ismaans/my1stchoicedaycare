@@ -1,9 +1,11 @@
 import { Button, Eyebrow, Section, Photo, CtaBand } from '../components/ui'
 import Carousel from '../components/Carousel'
 import LocationMap from '../components/LocationMap'
+import ExperiencesGrid from '../components/ExperiencesGrid'
 import { ShieldCheck, Cross, Cap, Users, Star, Arrow } from '../components/icons'
 import { ShieldCheck as ShieldLucide, Blocks, BookOpen } from 'lucide-react'
 import { trustPoints, business, asset, cta } from '../data/site'
+import { experiencePhotos } from '../data/experiences'
 
 const philosophyPoints = [
   {
@@ -25,61 +27,8 @@ const philosophyPoints = [
 
 const trustIcons = [ShieldCheck, Cross, Cap, Users]
 
-// Photos shown in the hero carousel — same Learning in Action photos as the Gallery.
-const heroSlides = [
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-58.jpg',
-    alt: 'A parent and child arriving at the daycare door on a snowy morning',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_2.jpg',
-    alt: 'A child following chalk arrows drawn on a driveway',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_3.jpg',
-    alt: 'A toddler sitting in a pile of fall leaves with a pot on their head',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_4.jpg',
-    alt: 'Children standing near letters spelled out with leaves on a dark pavement',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_5.jpg',
-    alt: 'A toddler climbing a tower of colorful foam blocks in front of a chalkboard',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_6.jpg',
-    alt: 'Close-up of children coloring together with crayons',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_7.jpg',
-    alt: 'A child painting on a large cardboard mural propped against a tree',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_8.jpg',
-    alt: 'A baby wearing oversized round blue toy glasses and smiling',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_9.jpg',
-    alt: 'A child drawing chalk shapes on a driveway from above',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_10.jpg',
-    alt: 'A toddler examining a painted pumpkin with a magnifying glass at a table',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59_11.jpg',
-    alt: 'Outdoor yard with parachutes and butterfly decorations spread on the grass',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-39-59.jpg',
-    alt: 'A toddler pushing a blue ride-on toy car across a green lawn',
-  },
-  {
-    src: '/photos/PHOTO-2026-07-13-12-42-36.jpg',
-    alt: 'A child spray painting a large colorful mural on cardboard outside',
-  },
-]
+// Photos shown in the hero carousel — same Experiences photos as the Gallery.
+const heroSlides = experiencePhotos.map(({ src, alt }) => ({ src, alt }))
 
 // Testimonials pull only from real review text. avatar/date/rating are left as
 // optional fields — ready to populate later, never fabricated.
@@ -384,6 +333,11 @@ export default function Home() {
           </div>
           <LocationMap className="h-full" />
         </div>
+      </Section>
+
+      {/* --------------------------------------------------- EXPERIENCES */}
+      <Section tone="cream" className="py-16 lg:py-24">
+        <ExperiencesGrid />
       </Section>
 
       {/* --------------------------------------------------- CLOSING CTA */}

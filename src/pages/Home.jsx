@@ -28,7 +28,12 @@ const philosophyPoints = [
 const trustIcons = [ShieldCheck, Cross, Cap, Users]
 
 // Photos shown in the hero carousel — same Experiences photos as the Gallery.
-const heroSlides = experiencePhotos.map(({ src, alt }) => ({ src, alt }))
+const heroSlides = experiencePhotos.map(({ src, alt, label, caption }) => ({
+  src,
+  alt,
+  label,
+  caption,
+}))
 
 // Testimonials pull only from real review text. avatar/date/rating are left as
 // optional fields — ready to populate later, never fabricated.
@@ -174,18 +179,22 @@ export default function Home() {
               viewportClassName="rounded-[12px] border border-sand shadow-[0_30px_60px_-30px_rgba(44,64,71,0.45)]"
             >
               {heroSlides.map((s) => (
-                <div key={s.src} className="aspect-[4/5]">
+                <div key={s.src} className="relative aspect-[4/5]">
                   <img
                     src={asset(s.src)}
                     alt={s.alt}
-                    className="h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                     loading="eager"
                   />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent px-5 pb-16 pt-14 sm:pb-[4.5rem]">
+                    <p className="font-display text-base font-semibold text-cream">{s.label}</p>
+                    <p className="mt-1 text-sm leading-snug text-cream/85">{s.caption}</p>
+                  </div>
                 </div>
               ))}
             </Carousel>
             <div className="absolute -bottom-5 -left-5 z-10 hidden rounded-[12px] border border-sand bg-cream px-5 py-4 shadow-lg sm:block">
-              <p className="font-display text-2xl font-bold text-maroon">Infants–11 yrs</p>
+              <p className="font-display text-2xl font-bold text-maroon">Infants–11 years</p>
               <p className="text-xs uppercase tracking-wider text-ink/60">Every age, cared for</p>
             </div>
           </div>

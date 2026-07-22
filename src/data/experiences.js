@@ -79,4 +79,11 @@ export const experiencePhotos = [
     src: '/photos/PHOTO-2026-07-13-12-42-36.jpg',
     alt: 'A child spray painting a large colorful mural on cardboard outside',
   },
+  {
+    label: 'Little Notes, Big Feelings',
+    caption:
+      'Handmade cards and thoughtful words — early writing and self-expression in every stroke.',
+    src: '/photos/PHOTO-2026-07-21-22-12-31.jpg',
+    alt: 'Handmade cards and a wrapped gift on a wooden table',
+  },
 ]

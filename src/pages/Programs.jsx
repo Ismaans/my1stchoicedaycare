@@ -12,7 +12,6 @@ import {
   FlaskConical,
   Palette,
 } from 'lucide-react'
-import { asset } from '../data/site'
 
 const ageGroups = [
   {
@@ -30,13 +29,13 @@ const ageGroups = [
   {
     icon: Pencil,
     name: 'Preschool',
-    age: '4–5 years',
+    age: '3–4 years',
     text: 'School-readiness through early literacy, numbers, and social skills — all guided by a structured curriculum.',
   },
   {
     icon: Backpack,
     name: 'School-age',
-    age: '6–11 years',
+    age: '5–11 years',
     text: 'Before/after-school support, homework help, and enriching activities in a calm, supervised setting.',
   },
 ]
@@ -128,37 +127,29 @@ export default function Programs() {
         </div>
       </Section>
 
-      {/* ------------------- CARE OPTIONS (full-bleed image + scrim) ------ */}
-      <section className="relative overflow-hidden">
-        {/* Background image with dark scrim; bg-ink is the flat-color fallback. */}
-        <div aria-hidden="true" className="absolute inset-0 bg-ink">
-          <img
-            src={asset('/photos/play-area.png')}
-            alt=""
-            className="h-full w-full object-cover opacity-45"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/85 to-ink/60" />
-        </div>
+      {/* --------------------------------------------------- CARE OPTIONS */}
+      <section className="grain relative overflow-hidden bg-mist">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-cream/60 blur-3xl"
+        />
 
         <div className="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-blush">
-              Care options
-            </span>
-            <h2 className="mt-3 text-3xl font-bold text-cream sm:text-4xl">
+            <Eyebrow>Care options</Eyebrow>
+            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
               Flexible schedules that fit real life
             </h2>
-            <p className="mt-5 text-cream/85">
+            <p className="mt-5 text-ink/80">
               Work schedules change, and so do family needs. We offer a range of options — from
               full-time enrollment to occasional drop-in and emergency backup care.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-cream/80">
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-ink/75">
               <span className="inline-flex items-center gap-2">
-                <Sun className="h-5 w-5 text-blush" strokeWidth={1.75} /> Summer care available
+                <Sun className="h-5 w-5 text-maroon" strokeWidth={1.75} /> Summer care available
               </span>
               <span className="inline-flex items-center gap-2">
-                <Clock className="h-5 w-5 text-blush" strokeWidth={1.75} /> Before &amp; after school
+                <Clock className="h-5 w-5 text-maroon" strokeWidth={1.75} /> Before &amp; after school
               </span>
             </div>
           </div>
@@ -167,9 +158,9 @@ export default function Programs() {
             {careOptions.map((opt) => (
               <li
                 key={opt}
-                className="flex items-center gap-3 rounded-[12px] border border-cream/20 bg-cream/10 px-4 py-4 text-cream backdrop-blur-sm"
+                className="flex items-center gap-3 rounded-[12px] border border-sand bg-cream px-4 py-4 text-ink shadow-[0_18px_40px_-34px_rgba(44,64,71,0.45)]"
               >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blush/20 text-blush">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mist text-maroon">
                   <Check className="h-3.5 w-3.5" strokeWidth={3} />
                 </span>
                 <span className="text-[0.95rem] font-medium">{opt}</span>

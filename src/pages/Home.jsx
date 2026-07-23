@@ -131,7 +131,7 @@ export default function Home() {
               className="reveal mt-6 text-4xl font-bold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]"
               style={{ animationDelay: '80ms' }}
             >
-              A Safe Place to <span className="text-maroon">Learn, Play</span> and{' '}
+              A Safe Place to <span className="text-maroon">Learn, Play,</span> and{' '}
               <span className="text-maroon">Grow</span>
             </h1>
 
@@ -193,8 +193,10 @@ export default function Home() {
                 </div>
               ))}
             </Carousel>
-            <div className="absolute -bottom-5 -left-5 z-10 hidden rounded-[12px] border border-sand bg-cream px-5 py-4 shadow-lg sm:block">
-              <p className="font-display text-2xl font-bold text-maroon">Infants–11 years</p>
+            <div className="absolute -bottom-5 -left-5 z-10 hidden max-w-[min(100%,18rem)] rounded-[12px] border border-sand bg-cream px-5 py-4 shadow-lg sm:block">
+              <p className="font-display text-xl font-bold leading-tight text-maroon sm:text-2xl">
+                Infants-Big Kids
+              </p>
               <p className="text-xs uppercase tracking-wider text-ink/60">Every age, cared for</p>
             </div>
           </div>

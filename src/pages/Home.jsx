@@ -186,7 +186,7 @@ export default function Home() {
                     className="absolute inset-0 h-full w-full object-cover"
                     loading="eager"
                   />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent px-5 pb-16 pt-14 sm:pb-[4.5rem]">
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent px-5 pb-20 pt-14 sm:pb-24">
                     <p className="font-display text-base font-semibold text-cream">{s.label}</p>
                     <p className="mt-1 text-sm leading-snug text-cream/85">{s.caption}</p>
                   </div>

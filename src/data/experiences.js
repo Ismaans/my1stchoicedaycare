@@ -18,7 +18,7 @@ export const experiencePhotos = [
     alt: 'A toddler sitting in a pile of fall leaves with a pot on their head',
   },
   {
-    label: 'Letters in Nature',
+    label: 'Shapes in Nature',
     caption:
       'Shapes in nature — children arrange leaves to form circles, squares, and triangles on the pavement.',
     src: '/photos/PHOTO-2026-07-13-12-39-59_4.jpg',

@@ -195,7 +195,7 @@ export default function Home() {
             </Carousel>
             <div className="absolute -bottom-5 -left-5 z-10 hidden max-w-[min(100%,18rem)] rounded-[12px] border border-sand bg-cream px-5 py-4 shadow-lg sm:block">
               <p className="font-display text-xl font-bold leading-tight text-maroon sm:text-2xl">
-                Infants-Big Kids
+                Infants • Toddlers & Up
               </p>
               <p className="text-xs uppercase tracking-wider text-ink/60">Every age, cared for</p>
             </div>
